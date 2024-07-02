@@ -1,5 +1,9 @@
 require "nvchad.mappings"
 
+-- Move first word after dash to end of line
+vim.api.nvim_set_keymap("x", "<leader>m", [[:s/\v - (\s*.\S*)(.*)$/ -\2 (\1)/<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<leader>m", [[:s/\v - (\s*.\S*)(.*)$/ -\2 (\1)/<CR>]], { noremap = true, silent = true })
+
 local map = vim.keymap.set
 
 -- ------------------------------ VISUAL MODE ------------------------------
@@ -18,7 +22,6 @@ map(
 -- ------------------------------ INSERT MODE ------------------------------
 map("i", "<C-s>", "<ESC><cmd> w <CR>", { desc = "write" })
 map("i", "<C-w>", "<ESC><cmd> wqa <CR>", { desc = "write/quit" })
--- map("i", "<C-S-q>",  "<ESC><cmd> qa! <CR>", { desc = "quit all!" })
 map("i", "<C-d>", "<C-d>zz", { desc = "PgDn keep center" })
 map("i", "<C-u>", "<C-u>zz", { desc = "PgUp keep center" })
 
