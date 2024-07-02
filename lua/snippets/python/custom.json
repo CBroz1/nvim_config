@@ -1,0 +1,38 @@
+{
+  "DJ Table": {
+    "scope": "python",
+    "prefix": "@schema",
+    "body": [
+      "@schema",
+      "class ${1:TableName}(dj.${2|Manual,Imported,Computed,Lookup|}):",
+      "\t\"\"\"${3}\"\"\"\n",
+      "\tdefinition = \"\"\"",
+      "\t${4}",
+      "\t---",
+      "\t${5}",
+      "\t\"\"\""
+    ]
+  },
+  "DJ Part Table": {
+    "scope": "python",
+    "prefix": "@sch-part",
+    "body": [
+      "@schema",
+      "class ${1:TableName}(dj.${2|Manual,Imported,Computed,Lookup|}):",
+      "\t\"\"\"${3}\"\"\"\n",
+      "\tdefinition = \"\"\"",
+      "\t${4}",
+      "\t---",
+      "\t${5}",
+      "\t\"\"\"\n\n",
+      "\tclass ${6:PartName}(dj.Part):",
+      "\t\t\"\"\"${7}\"\"\"\n",
+      "\t\tdefinition = \"\"\"",
+      "\t\t-> master",
+      "\t\t${8}",
+      "\t\t---",
+      "\t\t${9}",
+      "\t\t\"\"\""
+    ]
+  }
+}
