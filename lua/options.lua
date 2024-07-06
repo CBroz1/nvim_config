@@ -19,6 +19,7 @@ opt.swapfile = false
 
 vim.cmd [[autocmd FileType text setlocal indentexpr=indent]]
 vim.cmd [[ source ~/.config/nvim/lua/options.vim ]]
+vim.opt.pumheight = 10 -- limit nvim-cmp completion items
 
 -- Notify
 vim.notify = require("noice").notify

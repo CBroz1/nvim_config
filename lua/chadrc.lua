@@ -13,6 +13,10 @@ M.ui = {
     -- round and block will work for minimal theme only
     separator_style = "round",
   },
+  hl_add = {
+    WinBar = { bg = "None", fg = "#bd93f9" },
+    WinBarNC = { bg = "None" },
+  },
 }
 
 M.lsp = { signature = false } -- NVChad #1656

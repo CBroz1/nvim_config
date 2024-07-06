@@ -129,7 +129,15 @@ return {
           if cmp.visible() then
             cmp.select_next_item()
           elseif require("luasnip").expand_or_jumpable() then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
+            vim.fn.feedkeys(
+              vim.api.nvim_replace_termcodes(
+                "<Plug>luasnip-expand-or-jump",
+                true,
+                true,
+                true
+              ),
+              ""
+            )
           else
             fallback()
           end
@@ -142,7 +150,15 @@ return {
           if cmp.visible() then
             cmp.select_prev_item()
           elseif require("luasnip").jumpable(-1) then
-            vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+            vim.fn.feedkeys(
+              vim.api.nvim_replace_termcodes(
+                "<Plug>luasnip-jump-prev",
+                true,
+                true,
+                true
+              ),
+              ""
+            )
           else
             fallback()
           end
@@ -191,4 +207,17 @@ return {
   { "tpope/vim-surround", event = "VeryLazy" },
   { "jeetsukumaran/vim-indentwise", event = "VeryLazy" },
   { "tmhedberg/SimpylFold", event = "VeryLazy" }, -- for python
+  {
+    "utilyre/barbecue.nvim", -- winbar like vscode
+    name = "barbecue",
+    event = "VeryLazy",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      -- configurations go here
+    },
+  },
 }
