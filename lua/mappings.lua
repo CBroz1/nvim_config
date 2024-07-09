@@ -1,14 +1,34 @@
 require "nvchad.mappings"
 
 -- Move first word after dash to end of line
-vim.api.nvim_set_keymap("x", "<leader>m", [[:s/\v - (\s*.\S*)(.*)$/ -\2 (\1)/<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<leader>m", [[:s/\v - (\s*.\S*)(.*)$/ -\2 (\1)/<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "x",
+  "<leader>m",
+  [[:s/\v - (\s*.\S*)(.*)$/ -\2 (\1)/<CR>]],
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "v",
+  "<leader>m",
+  [[:s/\v - (\s*.\S*)(.*)$/ -\2 (\1)/<CR>]],
+  { noremap = true, silent = true }
+)
 
 local map = vim.keymap.set
 
 -- ------------------------------ VISUAL MODE ------------------------------
-map("v", "<C-c>", "<cmd> '<,'>w !xclip -selection clipboard <CR>", { desc = "Copy system clipboard" })
-map("v", "<leader>t", "<cmd>'<,'>s/\\<.\\u&/g <CR>", { desc = "Set title case" })
+map(
+  "v",
+  "<C-c>",
+  "<cmd> '<,'>w !xclip -selection clipboard <CR>",
+  { desc = "Copy system clipboard" }
+)
+map(
+  "v",
+  "<leader>t",
+  "<cmd>'<,'>s/\\<.\\u&/g <CR>",
+  { desc = "Set title case" }
+)
 map("v", "<leader>d", [[<cmd>'<,'>s/\n/\r\r/g<CR>]], { desc = "Double space" })
 map("v", "<leader>s", [[<cmd>'<,'>s/\n\n/\r/g<CR>]], { desc = "Single space" })
 map("v", "<leader>w", "<cmd>norm! gwip<CR>", { desc = "Rewrap" })
@@ -49,14 +69,44 @@ map("n", "<ScrollWheelUp>", "<C-u>zz", { desc = "PgUp keep center" })
 map("n", "<leader>ne", "<cmd> :cprev <CR>", { desc = "prev quicklist" })
 map("n", "<leader>ni", "<cmd> :cnext <CR>", { desc = "next quicklist" })
 -- F prefix
-map("n", "<leader>fc", "<cmd> Telescope command_history <CR>", { desc = "command history" })
-map("n", "<leader>fp", "<cmd> Telescope harpoon marks <CR>", { desc = "Harp Menu" })
+map(
+  "n",
+  "<leader>fc",
+  "<cmd> Telescope command_history <CR>",
+  { desc = "command history" }
+)
+map(
+  "n",
+  "<leader>fp",
+  "<cmd> Telescope harpoon marks <CR>",
+  { desc = "Harp Menu" }
+)
 -- G prefix
-map("n", "<leader>gl", "<cmd> Telescope git_commits <CR>", { desc = "git commits" })
-map("n", "<leader>gs", "<cmd> Telescope git_status <CR>", { desc = "git status" })
-map("n", "<leader>gw", "<cmd> Gitsigns toggle_current_line_blame <CR>", { desc = "git blame toggle" })
+map(
+  "n",
+  "<leader>gl",
+  "<cmd> Telescope git_commits <CR>",
+  { desc = "git commits" }
+)
+map(
+  "n",
+  "<leader>gs",
+  "<cmd> Telescope git_status <CR>",
+  { desc = "git status" }
+)
+map(
+  "n",
+  "<leader>gw",
+  "<cmd> Gitsigns toggle_current_line_blame <CR>",
+  { desc = "git blame toggle" }
+)
 -- N prefix, line nums, notif, wrap
-map("n", "<leader>nl", "<cmd> set nu! <CR> <cmd> set rnu! <CR>", { desc = "toggle all line number" })
+map(
+  "n",
+  "<leader>nl",
+  "<cmd> set nu! <CR> <cmd> set rnu! <CR>",
+  { desc = "toggle all line number" }
+)
 map("n", "<leader>nj", "<cmd> set rnu! <CR>", { desc = "toggle relative line" })
 map("n", "<leader>nk", "<cmd> set nu! <CR>", { desc = "toggle line number" })
 map("n", "<leader>nn", "<cmd> Notifications <CR>", { desc = "notifications" })
@@ -74,13 +124,45 @@ map("n", "<leader>ww", "gwip", { desc = "rewrap" })
 -- Toggle Windows
 map("n", "<C-f>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
 map("n", "<F8>", "<cmd> TagbarToggle <CR>", { desc = "toggle tagbar" })
+map(
+  "n",
+  "<F7>",
+  "<cmd> lua require('nvim-navbuddy').open() <CR>",
+  { desc = "toggle tagbar" }
+)
+
 -- save quit
 map("n", "<C-S-q>", "<cmd> qa! <CR>", { desc = "quit all!" })
 map("n", "<C-s>", "<cmd> w <CR>", { desc = "write" })
 map("n", "<C-q>", "<cmd> wqa! <CR>", { desc = "write quit!" })
 -- Harpoon
-map("n", "<leader>a", "<cmd> lua require('harpoon.mark').add_file() <CR>", { desc = "Harp Add" })
-map("n", "<leader>h", "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>", { desc = "Harp Menu" }) -- REQ TURN OFF in core/mappings.lua
-map("n", "<leader>1", "<cmd> lua require('harpoon.ui').nav_file(1) <CR>", { desc = "Harp 1" })
-map("n", "<leader>2", "<cmd> lua require('harpoon.ui').nav_file(2) <CR>", { desc = "Harp 2" })
-map("n", "<leader>3", "<cmd> lua require('harpoon.ui').nav_file(3) <CR>", { desc = "Harp 3" })
+map(
+  "n",
+  "<leader>a",
+  "<cmd> lua require('harpoon.mark').add_file() <CR>",
+  { desc = "Harp Add" }
+)
+map(
+  "n",
+  "<leader>h",
+  "<cmd> lua require('harpoon.ui').toggle_quick_menu() <CR>",
+  { desc = "Harp Menu" }
+) -- REQ TURN OFF in core/mappings.lua
+map(
+  "n",
+  "<leader>1",
+  "<cmd> lua require('harpoon.ui').nav_file(1) <CR>",
+  { desc = "Harp 1" }
+)
+map(
+  "n",
+  "<leader>2",
+  "<cmd> lua require('harpoon.ui').nav_file(2) <CR>",
+  { desc = "Harp 2" }
+)
+map(
+  "n",
+  "<leader>3",
+  "<cmd> lua require('harpoon.ui').nav_file(3) <CR>",
+  { desc = "Harp 3" }
+)

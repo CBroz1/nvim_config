@@ -8,10 +8,33 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    dependencies = {
+      {
+        "SmiteshP/nvim-navbuddy",
+        dependencies = {
+          "SmiteshP/nvim-navic",
+          "MunifTanjim/nui.nvim",
+        },
+        opts = { lsp = { auto_attach = true } },
+      },
+    },
     config = function()
       require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
+      require "configs.navbuddy"
     end,
+  },
+  {
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = {
+      -- configurations go here
+    },
   },
   {
     "williamboman/mason.nvim",
@@ -97,9 +120,11 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
     lazy = false,
-    config = function(_, opts)
-      require("copilot").setup(opts)
+    event = "InsertEnter",
+    config = function()
+      require "configs.copilot"
     end,
   },
   {
@@ -107,64 +132,20 @@ return {
     -- enabled = false,
     dependencies = {
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
-      "hrsh7th/cmp-path",
+      "zbirenbaum/cmp-copilot",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "ray-x/cmp-treesitter",
-      -- "hrsh7th/cmp-cmdline",
-      -- "hrsh7th/cmp-emoji",
-      -- "hrsh7th/cmp-vsnip",
-      -- "delphinus/cmp-ctags",
-      -- "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-emoji",
+      "delphinus/cmp-ctags",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
     },
-    opts = {
-      mapping = {
-        ["<C-]>"] = function(callback)
-          callback()
-        end,
-        -- use Up and down for cycling completion
-        ["<C-Down>"] = require("cmp").mapping(function(fallback)
-          local cmp = require "cmp"
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif require("luasnip").expand_or_jumpable() then
-            vim.fn.feedkeys(
-              vim.api.nvim_replace_termcodes(
-                "<Plug>luasnip-expand-or-jump",
-                true,
-                true,
-                true
-              ),
-              ""
-            )
-          else
-            fallback()
-          end
-        end, {
-          "i",
-          "s",
-        }),
-        ["<C-Up>"] = require("cmp").mapping(function(fallback)
-          local cmp = require "cmp"
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif require("luasnip").jumpable(-1) then
-            vim.fn.feedkeys(
-              vim.api.nvim_replace_termcodes(
-                "<Plug>luasnip-jump-prev",
-                true,
-                true,
-                true
-              ),
-              ""
-            )
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-      },
-    },
+    config = function()
+      require "configs.cmp"
+    end,
   },
   {
     "ThePrimeagen/harpoon",
@@ -207,17 +188,4 @@ return {
   { "tpope/vim-surround", event = "VeryLazy" },
   { "jeetsukumaran/vim-indentwise", event = "VeryLazy" },
   { "tmhedberg/SimpylFold", event = "VeryLazy" }, -- for python
-  {
-    "utilyre/barbecue.nvim", -- winbar like vscode
-    name = "barbecue",
-    event = "VeryLazy",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      -- configurations go here
-    },
-  },
 }

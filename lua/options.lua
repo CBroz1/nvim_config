@@ -30,9 +30,12 @@ local g = vim.g
 g.mouse = "nv"
 g.tagbar_sort = 0 -- should probably be in plugins file
 g.lua_snippets_path = vim.fn.stdpath "config" .. "/lua/custom/snippets/python"
-g.vscode_snippets_path = vim.fn.stdpath "config" .. "/lua/custom/snippets/python"
+g.vscode_snippets_path = vim.fn.stdpath "config"
+  .. "/lua/custom/snippets/python"
 g.pymode_python = "python3"
 g.python3_host_prog = "/home/cb/miniconda3/envs/spy/bin/python"
 -- g.loaded_python3_provider = '/home/cb/miniconda3/envs/spy/bin/python'
 -- g.loaded_python3_provider = 1 -- !! nondefault core, removed py L55
 -- print(os.getenv(CONDA_DEFAULT_ENV))
+
+require "configs/nvim-tree"

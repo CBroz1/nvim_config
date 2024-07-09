@@ -3,6 +3,7 @@ local options = {
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
+    tex = { "prettier" },
     python = { "isort", "black" },
     markdown = { "markdownlint" },
     ["*"] = { "codespell", "trim_whitespace" },

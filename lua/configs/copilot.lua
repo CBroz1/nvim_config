@@ -1,21 +1,21 @@
-local options = {
+require("copilot").setup {
   panel = {
     enabled = true,
-    auto_refresh = false,
+    auto_refresh = true,
     -- keymap = {
     --   jump_prev = "[[",
     --   jump_next = "]]",
     --   accept = "<CR>",
     --   refresh = "gr",
     --   open = "<M-CR>"
-    -- },
-    layout = {
-      position = "bottom", -- | top | left | right
-      ratio = 0.4,
-    },
   },
+  -- layout = {
+  --   position = "bottom", -- | top | left | right
+  --   ratio = 0.4,
+  -- },
+  -- },
   suggestion = {
-    enabled = true,
+    -- enabled = true,
     auto_trigger = true,
     -- debounce = 75,
     keymap = {
@@ -26,7 +26,7 @@ local options = {
       --   next = "<M-]>",
       --   prev = "<M-[>",
       next = "<C-.>",
-      prev = "<C-.>",
+      prev = "<C-,>",
       dismiss = "<C-/>",
     },
   },
@@ -44,5 +44,3 @@ local options = {
   copilot_node_command = "node", -- Node.js version must be > 16.x
   server_opts_overrides = {},
 }
-
-return options
