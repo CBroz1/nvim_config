@@ -23,13 +23,13 @@ cmp.setup {
     ["<C-e>"] = cmp.mapping.select_next_item {
       behavior = cmp.SelectBehavior.Select,
     },
-    -- ["<Tab>"] = function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   else
-    --     fallback()
-    --   end
-    -- end,
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
     -- ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     -- ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-o>"] = cmp.mapping.complete(),
@@ -42,7 +42,7 @@ cmp.setup {
   sources = cmp.config.sources {
     { name = "nvim_lsp" }, -- None?
     -- { name = "nvim_lua" }, -- None?
-    -- { name = "luasnip" }, -- Snippets
+    { name = "luasnip" }, -- Snippets
     { name = "buffer" },
     { name = "path" },
     -- { name = "nvim_lsp_document_symbol" },

@@ -3,9 +3,10 @@ local options = {
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
-    tex = { "prettier" },
+    -- tex = { "llf" }, -- dependencies via luarocks, didn't work
     python = { "isort", "black" },
     markdown = { "markdownlint" },
+    sql = { "sqlfluff" },
     ["*"] = { "codespell", "trim_whitespace" },
   },
   notify_on_error = true,

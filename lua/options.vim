@@ -18,3 +18,16 @@ augroup tex_files
   autocmd!
   autocmd BufRead,BufNewFile *.tex set filetype=tex
 augroup END
+
+let g:vimtex_fold_enabled = 1
+set fillchars=fold:\  " Space
+let g:vimtex_toc_config = {
+      \ 'name' : 'ToC',
+      \ 'fold_enable' : 1,
+      \ 'show_help': 0,
+      \ 'split_width': 30,
+      \ 'todo_sorted': 0,
+      \ 'layer_status': { 'include':0 },
+      \ 'hotkeys_leader' : '<Space>',
+      \ 'split_pos' : 'vert botright',
+      \}

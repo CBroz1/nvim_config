@@ -25,4 +25,5 @@ prettyFold.setup {
       -- " ┣━━",
     },
   },
+  ft_ignore = { "tex" },
 }

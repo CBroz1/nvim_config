@@ -1,5 +1,9 @@
 require "nvchad.mappings"
 
+local function opts(desc)
+  return { buffer = bufnr, desc = "LSP " .. desc }
+end
+
 -- Move first word after dash to end of line
 vim.api.nvim_set_keymap(
   "x",
@@ -44,6 +48,7 @@ map("i", "<C-s>", "<ESC><cmd> w <CR>", { desc = "write" })
 map("i", "<C-w>", "<ESC><cmd> wqa <CR>", { desc = "write/quit" })
 map("i", "<C-d>", "<C-d>zz", { desc = "PgDn keep center" })
 map("i", "<C-u>", "<C-u>zz", { desc = "PgUp keep center" })
+map("i", "<C-,>", "<ESC>zzi", { desc = "Keep center" })
 
 -- ------------------------------ NORMAL MODE ------------------------------
 -- Comment
@@ -64,10 +69,12 @@ map("n", "<C-o>", "<C-w>l", { desc = "Switch Window right" })
 -- map("n", "<C-Up>", "<C-w>k", { desc = "window up" })
 map("n", "<C-d>", "<C-d>zz", { desc = "PgDn keep center" })
 map("n", "<C-u>", "<C-u>zz", { desc = "PgUp keep center" })
+map("n", "<leader>u", "zt", { desc = "Focus top" })
 map("n", "<ScrollWheelDown>", "<C-d>zz", { desc = "PgDn keep center" })
 map("n", "<ScrollWheelUp>", "<C-u>zz", { desc = "PgUp keep center" })
 map("n", "<leader>ne", "<cmd> :cprev <CR>", { desc = "prev quicklist" })
 map("n", "<leader>ni", "<cmd> :cnext <CR>", { desc = "next quicklist" })
+map("n", "<leader>i", "za", { desc = "toggle fold" })
 -- F prefix
 map(
   "n",
@@ -81,7 +88,9 @@ map(
   "<cmd> Telescope harpoon marks <CR>",
   { desc = "Harp Menu" }
 )
+map("n", "<leader>fm", "<cmd> Telescope marks <CR>", { desc = "marks" })
 -- G prefix
+map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts "Goto Definition")
 map(
   "n",
   "<leader>gl",
@@ -121,9 +130,15 @@ map("n", "<leader>nq", "<cmd> qa! <CR>", { desc = "quit all!" })
 map("n", "<leader>wq", "<cmd> wq! <CR>", { desc = "write quit!" })
 -- W prefix
 map("n", "<leader>ww", "gwip", { desc = "rewrap" })
+-- R prefix
+map("n", "<leader>ra", function()
+  require "nvchad.lsp.renamer"()
+end, opts "NvRenamer")
 -- Toggle Windows
 map("n", "<C-f>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
-map("n", "<F8>", "<cmd> TagbarToggle <CR>", { desc = "toggle tagbar" })
+map("n", "<C-l>", "<cmd> TagbarToggle <CR>", { desc = "toggle tagbar" })
+map("n", "<C-j>", "<cmd> VimtexTocToggle <CR>", { desc = "toggle vimtex" })
+map("n", "<C-y>", "<cmd> Navbuddy <CR>", { desc = "navbuddy" })
 map(
   "n",
   "<F7>",

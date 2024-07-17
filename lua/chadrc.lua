@@ -17,6 +17,7 @@ M.ui = {
     WinBar = { bg = "None", fg = "#bd93f9" },
     WinBarNC = { bg = "None" },
   },
+  term = { pos = "vsp", size = 0.5 },
 }
 
 M.lsp = { signature = false } -- NVChad #1656

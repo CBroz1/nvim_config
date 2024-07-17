@@ -39,3 +39,4 @@ g.python3_host_prog = "/home/cb/miniconda3/envs/spy/bin/python"
 -- print(os.getenv(CONDA_DEFAULT_ENV))
 
 require "configs/nvim-tree"
+require "nvchad.configs.lspconfig" -- otherwise renamer not load
