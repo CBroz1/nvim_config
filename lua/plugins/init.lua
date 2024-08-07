@@ -104,13 +104,13 @@ return {
       require "configs.neoscroll"
     end,
   },
-  {
-    "anuvyklack/pretty-fold.nvim",
-    event = "BufReadPre",
-    config = function()
-      require "configs.pretty-fold"
-    end,
-  },
+  -- {
+  --   "anuvyklack/pretty-fold.nvim",
+  --   event = "BufReadPre",
+  --   config = function()
+  --     require "configs.pretty-fold"
+  --   end,
+  -- },
   { -- Add jumps to
     "ggandor/leap.nvim",
     event = "BufReadPre",
@@ -197,5 +197,23 @@ return {
       vim.g.vimtex_view_method = "zathura"
       vim.g.vimtex_fold_enabled = 1
     end,
+  },
+  { "ojroques/nvim-bufdel" }, -- only used for close buf, not wind
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+    },
+    keys = {
+      { "<c-n>", "<cmd>TmuxNavigateLeft<cr>" },
+      { "<c-e>", "<cmd>TmuxNavigateDown<cr>" },
+      { "<c-i>", "<cmd>TmuxNavigateUp<cr>" },
+      { "<c-o>", "<cmd>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
+    },
   },
 }
