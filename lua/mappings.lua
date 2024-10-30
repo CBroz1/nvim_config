@@ -59,10 +59,22 @@ end, { desc = "Comment Toggle" })
 map("n", "<leader><leader>", ":", { desc = "cmdline" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 -- Navigation
-map("n", "<C-n>", "<C-w>h", { desc = "Switch Window left" })
-map("n", "<C-e>", "<C-w>j", { desc = "Switch Window down" })
-map("n", "<C-i>", "<C-w>k", { desc = "Switch Window up" })
-map("n", "<C-o>", "<C-w>l", { desc = "Switch Window right" })
+-- map("n", "<C-n>", "<C-w>h", { desc = "Switch Window left" })
+-- map("n", "<C-e>", "<C-w>j", { desc = "Switch Window down" })
+-- map("n", "<C-i>", "<C-w>k", { desc = "Switch Window up" })
+-- map("n", "<C-o>", "<C-w>l", { desc = "Switch Window right" })
+map("n", "<C-w>n", "<C-w>h", { desc = "Switch Window left" })
+map("n", "<C-w>e", "<C-w>j", { desc = "Switch Window down" })
+map("n", "<C-w>i", "<C-w>k", { desc = "Switch Window up" })
+map("n", "<C-w>o", "<C-w>l", { desc = "Switch Window right" })
+map(
+  "n",
+  "<C-w>x",
+  "<cmd> lua require('bufdel') <CR> <cmd> BufDel <CR>",
+  { desc = "Close buf, not wind" }
+)
+
+-- Comment out when added tmux-navigator
 -- map("n", "<C-Right>", "<C-w>l", { desc = "window right" })
 -- map("n", "<C-Left>", "<C-w>h", { desc = "window left" })
 -- map("n", "<C-Down>", "<C-w>j", { desc = "window down" })
