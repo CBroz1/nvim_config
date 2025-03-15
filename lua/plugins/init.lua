@@ -1,10 +1,11 @@
 return {
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    event = "BufWritePre", -- format on save
     config = function()
       require "configs.conform"
     end,
+    -- opts = require "configs.conform", -- in fetched update
   },
   {
     "neovim/nvim-lspconfig",

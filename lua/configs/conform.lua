@@ -16,6 +16,7 @@ local options = {
   },
 }
 
+-- rm this block?
 require("conform").setup(options)
 
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -24,3 +25,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     require("conform").format { bufnr = args.buf }
   end,
 })
+-- block
+
+return options -- rm this line?
