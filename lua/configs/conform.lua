@@ -7,7 +7,7 @@ local options = {
     python = { "isort", "black" },
     markdown = { "markdownlint" },
     sql = { "sqlfluff" },
-    ["*"] = { "codespell --config ~/.config/.codespellrc", "trim_whitespace" },
+    ["*"] = { "codespell", "trim_whitespace" },
   },
   notify_on_error = true,
   format_on_save = { -- These options will be passed to conform.format()
