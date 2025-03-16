@@ -23,4 +23,12 @@ M.base46 = {
 
 M.lsp = { signature = false } -- NVChad #1656
 
+M.nvdash = { load_on_startup = true }
+
+M.ui = {
+  tabufline = {
+    lazyload = false,
+  },
+}
+
 return M
