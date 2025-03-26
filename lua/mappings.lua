@@ -35,7 +35,13 @@ map(
 )
 map("v", "<leader>d", [[<cmd>'<,'>s/\n/\r\r/g<CR>]], { desc = "Double space" })
 map("v", "<leader>s", [[<cmd>'<,'>s/\n\n/\r/g<CR>]], { desc = "Single space" })
-map("v", "<leader>w", "<cmd>norm! gwip<CR>", { desc = "Rewrap" })
+
+-- rewrap sometimes leaves indents, so reselect as visual mode and <<
+-- map( "v", "<leader>w", "<cmd>norm! gwip<CR>", { desc = "Rewrap" })
+map("v", "<leader>w", function()
+  vim.cmd [[norm! gwip]]
+  vim.cmd [[silent! norm! vip<<]]
+end, { desc = "Rewrap" })
 map(
   "v",
   "<leader>/",
@@ -141,7 +147,11 @@ map("n", "<leader>nw", "<cmd> set wrap! <CR>", { desc = "toggle wrap" })
 map("n", "<leader>nq", "<cmd> qa! <CR>", { desc = "quit all!" })
 map("n", "<leader>wq", "<cmd> wq! <CR>", { desc = "write quit!" })
 -- W prefix
-map("n", "<leader>ww", "gwip", { desc = "rewrap" })
+-- map("n", "<leader>ww", "gwip", { desc = "rewrap" })
+map("n", "<leader>ww", function()
+  vim.cmd [[norm! gwip]]
+  vim.cmd [[silent! norm! vip<<]]
+end, { desc = "rewrap2" })
 -- R prefix
 map("n", "<leader>ra", function()
   require "nvchad.lsp.renamer"()

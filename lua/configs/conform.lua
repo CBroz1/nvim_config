@@ -14,6 +14,11 @@ local options = {
     timeout_ms = 500,
     lsp_fallback = true,
   },
+  formatters = {
+    black = {
+      prepend_args = { "--line-length", "80" },
+    },
+  },
 }
 
 -- rm this block?
