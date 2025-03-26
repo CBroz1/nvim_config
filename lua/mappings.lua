@@ -1,7 +1,10 @@
 require "nvchad.mappings"
 
 local function opts(desc)
-  return { buffer = bufnr, desc = "LSP " .. desc }
+  return {
+    -- buffer = bufnr,
+    desc = "LSP " .. desc
+  }
 end
 
 -- Move first word after dash to end of line
@@ -87,6 +90,7 @@ map("n", "<ScrollWheelUp>", "<C-u>zz", { desc = "PgUp keep center" })
 map("n", "<leader>ne", "<cmd> :cprev <CR>", { desc = "prev quicklist" })
 map("n", "<leader>ni", "<cmd> :cnext <CR>", { desc = "next quicklist" })
 map("n", "<leader>i", "za", { desc = "toggle fold" })
+map("n", "<leader>nc", "<cmd> Noice dismiss <CR>", { desc = "dismiss noice" })
 -- F prefix
 map(
   "n",
@@ -143,9 +147,10 @@ map("n", "<leader>wq", "<cmd> wq! <CR>", { desc = "write quit!" })
 -- W prefix
 map("n", "<leader>ww", "gwip", { desc = "rewrap" })
 -- R prefix
-map("n", "<leader>ra", function()
-  require "nvchad.lsp.renamer"()
-end, opts "NvRenamer")
+-- map("n", "<leader>ra", function()
+--   require "nvchad.lsp.renamer"()
+-- end, opts "NvRenamer")
+map("n", "<leader>ra", require "nvchad.lsp.renamer", opts "NvRenamer")
 -- Toggle Windows
 map("n", "<C-f>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
 map("n", "<C-l>", "<cmd> TagbarToggle <CR>", { desc = "toggle tagbar" })

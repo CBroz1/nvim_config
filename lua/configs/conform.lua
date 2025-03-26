@@ -4,20 +4,21 @@ local options = {
     -- css = { "prettier" },
     -- html = { "prettier" },
     -- tex = { "llf" }, -- dependencies via luarocks, didn't work
-    python = { "isort", "black" },
+    json = {'fixjson'},
+    python = { "isort", "black", "ruff_fix", "ruff_format" },
     markdown = { "markdownlint" },
     sql = { "sqlfluff" },
     ["*"] = { "codespell", "trim_whitespace" },
   },
-  notify_on_error = true,
+  notify_on_error = false,
   format_on_save = { -- These options will be passed to conform.format()
-    timeout_ms = 500,
+    timeout_ms = 5000,
     lsp_fallback = true,
+    async = true,
+    quiet = true,
   },
+  log_level = vim.log.levels.DEBUG,
 }
-
--- rm this block?
-require("conform").setup(options)
 
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
@@ -25,6 +26,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     require("conform").format { bufnr = args.buf }
   end,
 })
--- block
 
-return options -- rm this line?
+
+return options
