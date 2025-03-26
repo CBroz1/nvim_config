@@ -1,61 +1,45 @@
 return {
-  {
+  { -- Formatter
     "stevearc/conform.nvim",
+    enabled = true,
     event = "BufWritePre", -- format on save
-    config = function()
-      require "configs.conform"
-    end,
-    -- opts = require "configs.conform", -- in fetched update
+    opts = require "configs.conform", -- in fetched update
+  },
+  { -- Top-line breadcrumbs -- public archive
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    version = "*",
+    enabled = true,
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    opts = { },
   },
   {
     "neovim/nvim-lspconfig",
+    enabled = true,
     dependencies = {
       {
         "SmiteshP/nvim-navbuddy",
         dependencies = {
-          "SmiteshP/nvim-navic",
-          "MunifTanjim/nui.nvim",
+          "SmiteshP/nvim-navic", -- top-bar breadcrumbs, barbecue replacement
+          "MunifTanjim/nui.nvim", -- ui components
         },
         opts = { lsp = { auto_attach = true } },
       },
     },
     config = function()
-      require("nvchad.configs.lspconfig").defaults()
       require "configs.lspconfig"
       require "configs.navbuddy"
     end,
   },
   {
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {
-      -- configurations go here
-    },
-  },
-  {
-    "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "html-lsp",
-        "css-lsp",
-        "prettier",
-      },
-    },
-  },
-  { "williamboman/mason-lspconfig.nvim" }, --newest
-  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
         "vim",
-        "lua",
+        -- "lua",
         "vimdoc",
         "markdown",
         "markdown_inline",
@@ -81,7 +65,6 @@ return {
     enabled = true,
     event = "VeryLazy",
     config = function()
-      -- require("noice").setup({ require "configs.noice" })
       require("noice").setup {
         lsp = {
           signature = { enabled = false },
@@ -92,28 +75,29 @@ return {
     end,
     dependencies = {
       "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
   },
   {
     "karb94/neoscroll.nvim",
+    enabled = true,
     event = "BufReadPost",
     config = function()
       require "configs.neoscroll"
     end,
   },
-  -- {
-  --   "anuvyklack/pretty-fold.nvim",
-  --   event = "BufReadPre",
-  --   config = function()
-  --     require "configs.pretty-fold"
-  --   end,
-  -- },
-  { -- Add jumps to
+  {
+    -- "anuvyklack/pretty-fold.nvim", -- errored orig
+    "bbjornstad/pretty-fold.nvim",
+    enabled = false,
+    event = "BufReadPre",
+    config = function()
+      require "configs.pretty-fold"
+    end,
+  },
+  { -- Add jumps to. s{char1}{char2}{hint}
     "ggandor/leap.nvim",
+    enabled = true,
     event = "BufReadPre",
     config = function()
       require("leap").add_default_mappings()
@@ -121,6 +105,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
+    enabled = true,
     cmd = "Copilot",
     lazy = false,
     event = "InsertEnter",
@@ -130,7 +115,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    -- enabled = false,
+    enabled = true,
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
@@ -156,27 +141,11 @@ return {
       require("telescope").load_extension "harpoon"
     end,
   },
-  {
-    "taoso/tagbar-markdown",
-    event = "VeryLazy",
-    dependencies = { "majutsushi/tagbar" },
-  },
-  {
-    "richardbizik/nvim-toc",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-toc").setup {}
-    end,
-  },
-  {
+  { -- Used for <leader>/
     "numToStr/Comment.nvim",
+    enabled = true,
     keys = {
-      { "gcc", mode = "n", desc = "Comment toggle current line" },
       { "gc", mode = { "n", "o" }, desc = "Comment toggle linewise" },
-      { "gc", mode = "x", desc = "Comment toggle linewise (visual)" },
-      { "gbc", mode = "n", desc = "Comment toggle current block" },
-      { "gb", mode = { "n", "o" }, desc = "Comment toggle blockwise" },
-      { "gb", mode = "x", desc = "Comment toggle blockwise (visual)" },
     },
     init = function()
       vim.g.comment_maps = true
@@ -185,23 +154,14 @@ return {
       require("Comment").setup(opts)
     end,
   },
-  { "cespare/vim-toml" },
-  { "tpope/vim-surround", event = "VeryLazy" },
-  { "jeetsukumaran/vim-indentwise", event = "VeryLazy" },
-  { "tmhedberg/SimpylFold", event = "VeryLazy" }, -- for python
-  {
-    "lervag/vimtex",
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
-    init = function()
-      -- VimTeX configuration goes here, e.g.
-      vim.g.vimtex_view_method = "zathura"
-      vim.g.vimtex_fold_enabled = 1
-    end,
-  },
-  { "ojroques/nvim-bufdel" }, -- only used for close buf, not wind
+  { "cespare/vim-toml" }, -- add toml syntax
+  { "tpope/vim-surround", enabled=true, event = "VeryLazy" }, -- surround with `csw"`
+  { "jeetsukumaran/vim-indentwise", enabled=false, event = "VeryLazy" }, -- move based on indent
+  { "tmhedberg/SimpylFold", enabled=true, event = "VeryLazy" }, -- for python
+  { "ojroques/nvim-bufdel", enabled = true }, -- close buf w/o close window
   {
     "christoomey/vim-tmux-navigator",
+    enabled = true,
     cmd = {
       "TmuxNavigateLeft",
       "TmuxNavigateDown",
@@ -216,5 +176,54 @@ return {
       { "<c-o>", "<cmd>TmuxNavigateRight<cr>" },
       { "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
     },
+  },
+  -- DISABLED --
+  { -- Downloads/installs plugins in venv
+    "williamboman/mason.nvim",
+    enabled = false,
+    opts = {
+      ensure_installed = {
+        "black",
+        "codespell",
+        "css-lsp",
+        "html-lsp",
+        "isort",
+        "json-lsp",
+        "lua-language-server",
+        "markdownlint",
+        "prettier",
+        "python-lsp-server",
+        "ruff",
+        "sqlfluff",
+        "stylua",
+        "texlab",
+      },
+    },
+  },
+  { "williamboman/mason-lspconfig.nvim", enabled=false },
+  {
+    "richardbizik/nvim-toc",
+    enabled=false,
+    event = "VeryLazy",
+    config = function()
+      require("nvim-toc").setup {}
+    end,
+  },
+  { -- Table of contents for markdown files with <c-y>
+    "taoso/tagbar-markdown",
+    enabled = false,
+    event = "VeryLazy",
+    dependencies = { "majutsushi/tagbar" },
+  },
+  {
+    "lervag/vimtex",
+    enabled = false,
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = "zathura"
+      vim.g.vimtex_fold_enabled = 1
+    end,
   },
 }

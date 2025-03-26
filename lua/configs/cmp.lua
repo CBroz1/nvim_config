@@ -35,20 +35,21 @@ cmp.setup {
     ["<C-o>"] = cmp.mapping.complete(),
     ["<Esc>"] = cmp.mapping.abort(),
     ["<CR>"] = cmp.mapping.confirm {
-      select = true, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+      -- Set `select` to `false` to only confirm explicitly selected items.
+      select = true, -- Accept currently selected item.
       behavior = cmp.ConfirmBehavior.Replace,
     },
   },
   sources = cmp.config.sources {
     { name = "nvim_lsp" }, -- None?
-    -- { name = "nvim_lua" }, -- None?
     { name = "luasnip" }, -- Snippets
     { name = "buffer" },
     { name = "path" },
-    -- { name = "nvim_lsp_document_symbol" },
     { name = "copilot" },
     { name = "treesitter" },
-    -- { name = "cmdline" },
+    { name = "cmdline" },
+    -- { name = "nvim_lua" }, -- None?
+    -- { name = "nvim_lsp_document_symbol" },
     -- { name = "emoji" },
     -- { name = "ctags" },
   },
@@ -57,10 +58,7 @@ cmp.setup {
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
-})
+  sources = { { name = "buffer" }, }, })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
@@ -70,24 +68,24 @@ cmp.setup.cmdline(":", {
 })
 
 -- Set up lspconfig.
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-require("lspconfig")["pylsp"].setup {
-  capabilities = capabilities,
-}
+-- require("lspconfig")["pylsp"].setup {
+--   capabilities = capabilities,
+-- }
 
--- cmp.setup.filetype({ "markdown", "latex", "help" }, {
---   sources = {
---     { name = "path" },
---     { name = "buffer" },
---   },
--- })
--- cmp.setup.filetype({ "python" }, {
---   sources = {
---     { name = "fuzzy-buffer" },
---     { name = "fuzzy-path" },
---     { name = "treesitter" },
---     { name = "pylsp" },
---     { name = "copilot" },
---   },
--- })
+cmp.setup.filetype({ "markdown", "latex", "help" }, {
+  sources = {
+    { name = "path" },
+    { name = "buffer" },
+  },
+})
+cmp.setup.filetype({ "python" }, {
+  sources = {
+    { name = "fuzzy-buffer" },
+    { name = "fuzzy-path" },
+    { name = "treesitter" },
+    { name = "pylsp" },
+    { name = "copilot" },
+  },
+})
