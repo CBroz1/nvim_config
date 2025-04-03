@@ -41,14 +41,14 @@ lspconfig.pylsp.setup {
         pyls_isort = { enabled = false },
         jedi_completion = { enabled = false },
         jedi_signature_help = { enabled = false },
-        black = { enabled = true },
+        black = { enabled = true, lineLength = 80 },
         autopep8 = { enabled = false },
       },
     },
   },
 }
 
-local navic = require("nvim-navic")
+local navic = require "nvim-navic"
 lspconfig.clangd.setup {
   on_attach = function(lsp, bufnr)
     nvlsp.on_attach(lsp, bufnr)

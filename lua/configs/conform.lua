@@ -1,10 +1,11 @@
 local options = {
   formatters_by_ft = {
+    bash = { "shfmt" },
     lua = { "stylua" },
     -- css = { "prettier" },
     -- html = { "prettier" },
     -- tex = { "llf" }, -- dependencies via luarocks, didn't work
-    json = {'fixjson'},
+    json = { "fixjson" },
     python = { "isort", "black", "ruff_fix", "ruff_format" },
     markdown = { "markdownlint" },
     sql = { "sqlfluff" },
@@ -14,11 +15,16 @@ local options = {
   format_on_save = { -- These options will be passed to conform.format()
     timeout_ms = 5000,
     lsp_fallback = true,
-    async = true,
     quiet = true,
   },
   formatters = {
     black = {
+      prepend_args = { "--line-length", "80" },
+    },
+    ruff_fix = {
+      prepend_args = { "--line-length", "80" },
+    },
+    ruff_format = {
       prepend_args = { "--line-length", "80" },
     },
   },
@@ -31,6 +37,5 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     require("conform").format { bufnr = args.buf }
   end,
 })
-
 
 return options

@@ -14,7 +14,7 @@ return {
       "SmiteshP/nvim-navic",
       "nvim-tree/nvim-web-devicons", -- optional dependency
     },
-    opts = { },
+    opts = {},
   },
   {
     "neovim/nvim-lspconfig",
@@ -155,9 +155,9 @@ return {
     end,
   },
   { "cespare/vim-toml" }, -- add toml syntax
-  { "tpope/vim-surround", enabled=true, event = "VeryLazy" }, -- surround with `csw"`
-  { "jeetsukumaran/vim-indentwise", enabled=false, event = "VeryLazy" }, -- move based on indent
-  { "tmhedberg/SimpylFold", enabled=true, event = "VeryLazy" }, -- for python
+  { "tpope/vim-surround", enabled = true, event = "VeryLazy" }, -- surround with `csw"`
+  { "jeetsukumaran/vim-indentwise", enabled = false, event = "VeryLazy" }, -- move based on indent
+  { "tmhedberg/SimpylFold", enabled = true, event = "VeryLazy" }, -- for python
   { "ojroques/nvim-bufdel", enabled = true }, -- close buf w/o close window
   {
     "christoomey/vim-tmux-navigator",
@@ -200,10 +200,10 @@ return {
       },
     },
   },
-  { "williamboman/mason-lspconfig.nvim", enabled=false },
+  { "williamboman/mason-lspconfig.nvim", enabled = false },
   {
     "richardbizik/nvim-toc",
-    enabled=false,
+    enabled = false,
     event = "VeryLazy",
     config = function()
       require("nvim-toc").setup {}
