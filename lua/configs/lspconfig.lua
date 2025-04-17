@@ -1,7 +1,7 @@
 require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "pylsp", "jsonls", "texlab" }
+local servers = { "pylsp", "jsonls", "texlab" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -12,7 +12,6 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
-
 
 local cmp_capab = require("cmp_nvim_lsp").default_capabilities()
 local merged_capab = vim.tbl_deep_extend("force", cmp_capab, nvlsp.capabilities)
@@ -48,10 +47,12 @@ lspconfig.pylsp.setup {
   },
 }
 
-local navic = require "nvim-navic"
+-- local navic = require "nvim-navic"
+-- local navbuddy = require "nvim-navbuddy"
 lspconfig.clangd.setup {
   on_attach = function(lsp, bufnr)
     nvlsp.on_attach(lsp, bufnr)
-    navic.attach(lsp, bufnr)
+    -- navic.attach(lsp, bufnr)
+    -- navbuddy.attach(lsp, bufnr)
   end,
 }

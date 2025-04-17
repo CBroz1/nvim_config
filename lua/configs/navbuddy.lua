@@ -131,3 +131,9 @@ navbuddy.setup {
   -- },
   -- custom_hl_group = nil, -- "Visual" or any other hl group to use instead of inverted colors
 }
+
+-- require("lspconfig").clangd.setup {
+--   on_attach = function(client, bufnr)
+--     navbuddy.attach(client, bufnr)
+--   end,
+-- }

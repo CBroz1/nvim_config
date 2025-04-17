@@ -45,4 +45,4 @@ vim.schedule(function()
   require "mappings"
 end)
 
-require("barbecue.ui").update()
+-- require("barbecue.ui").update()

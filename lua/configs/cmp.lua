@@ -1,7 +1,6 @@
 local cmp = require "cmp"
 
 cmp.setup {
-
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
@@ -41,24 +40,38 @@ cmp.setup {
     },
   },
   sources = cmp.config.sources {
-    { name = "nvim_lsp" }, -- None?
-    { name = "luasnip" }, -- Snippets
     { name = "buffer" },
-    { name = "path" },
-    { name = "copilot" },
-    { name = "treesitter" },
     { name = "cmdline" },
-    -- { name = "nvim_lua" }, -- None?
-    -- { name = "nvim_lsp_document_symbol" },
-    -- { name = "emoji" },
-    -- { name = "ctags" },
+    { name = "copilot" },
+    { name = "ctags" },
+    { name = "emoji" },
+    { name = "fuzzy-buffer" },
+    { name = "fuzzy-path" },
+    { name = "luasnip" }, -- Snippets
+    { name = "nvim_lsp" }, -- None?
+    { name = "nvim_lsp_document_symbol" },
+    { name = "nvim_lua" }, -- None?
+    { name = "path" },
+    { name = "treesitter" },
   },
 }
+
+require("luasnip.loaders.from_vscode").load {
+  paths = { "/home/cb/.config/nvim/lua/snippets/python/" },
+}
+require("luasnip.loaders.from_vscode").lazy_load()
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-o>",
+  "<cmd> lua vim.lsp.buf.completion() <CR>",
+  { noremap = true, silent = true }
+)
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = { { name = "buffer" }, }, })
+  sources = { { name = "buffer" } },
+})
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(":", {
@@ -76,16 +89,24 @@ cmp.setup.cmdline(":", {
 
 cmp.setup.filetype({ "markdown", "latex", "help" }, {
   sources = {
-    { name = "path" },
     { name = "buffer" },
+    { name = "copilot" },
+    { name = "emoji" },
+    { name = "fuzzy-buffer" },
+    { name = "fuzzy-path" },
+    { name = "nvim_lsp" },
+    { name = "path" },
   },
 })
 cmp.setup.filetype({ "python" }, {
   sources = {
+    { name = "copilot" },
+    { name = "ctags" },
+    { name = "emoji" },
     { name = "fuzzy-buffer" },
     { name = "fuzzy-path" },
+    { name = "luasnip" },
+    { name = "nvim_lsp" },
     { name = "treesitter" },
-    { name = "pylsp" },
-    { name = "copilot" },
   },
 })

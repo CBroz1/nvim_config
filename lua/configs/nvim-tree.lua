@@ -12,6 +12,7 @@ require("nvim-tree").setup {
     custom = {
       "^.git$",
       "*.egg-info",
+      "^.idea*",
       "*.github",
       "*.ipynb_checkpoints",
       ".DS_Store",
