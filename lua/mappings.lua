@@ -3,7 +3,7 @@ require "nvchad.mappings"
 local function opts(desc)
   return {
     -- buffer = bufnr,
-    desc = "LSP " .. desc
+    desc = "LSP " .. desc,
   }
 end
 
@@ -163,15 +163,9 @@ end, { desc = "rewrap2" })
 map("n", "<leader>ra", require "nvchad.lsp.renamer", opts "NvRenamer")
 -- Toggle Windows
 map("n", "<C-f>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
-map("n", "<C-l>", "<cmd> TagbarToggle <CR>", { desc = "toggle tagbar" })
 map("n", "<C-j>", "<cmd> VimtexTocToggle <CR>", { desc = "toggle vimtex" })
-map("n", "<C-y>", "<cmd> Navbuddy <CR>", { desc = "navbuddy" })
-map(
-  "n",
-  "<F7>",
-  "<cmd> lua require('nvim-navbuddy').open() <CR>",
-  { desc = "toggle tagbar" }
-)
+map("n", "<C-y>", "<cmd> AerialNavToggle <CR>", { desc = "navbuddy" })
+map("n", "<C-l>", "<cmd> AerialToggle <CR>", { desc = "toggle tagbar" })
 
 -- save quit
 map("n", "<C-S-q>", "<cmd> qa! <CR>", { desc = "quit all!" })

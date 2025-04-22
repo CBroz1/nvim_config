@@ -5,17 +5,6 @@ return {
     event = "BufWritePre", -- format on save
     opts = require "configs.conform", -- in fetched update
   },
-  { -- Top-line breadcrumbs -- public archive
-    "utilyre/barbecue.nvim",
-    name = "barbecue",
-    version = "*",
-    enabled = true,
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons", -- optional dependency
-    },
-    opts = {},
-  },
   {
     "neovim/nvim-lspconfig",
     enabled = true,
@@ -31,7 +20,19 @@ return {
     },
     config = function()
       require "configs.lspconfig"
-      require "configs.navbuddy"
+      -- require "configs.navbuddy"
+    end,
+  },
+  {
+    "stevearc/aerial.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require "configs.aerial"
     end,
   },
   {
@@ -112,6 +113,19 @@ return {
     config = function()
       require "configs.copilot"
     end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    enabled = true,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-fzf-native.nvim", -- for fuzzy.nvim
+      -- "fcying/telescope-ctags-outline.nvim", -- for outline
+      build = "make",
+      config = function()
+        require("telescope").load_extension "fzf"
+      end,
+    },
   },
   {
     "hrsh7th/nvim-cmp",

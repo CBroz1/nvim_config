@@ -47,12 +47,16 @@ lspconfig.pylsp.setup {
   },
 }
 
--- local navic = require "nvim-navic"
--- local navbuddy = require "nvim-navbuddy"
-lspconfig.clangd.setup {
-  on_attach = function(lsp, bufnr)
-    nvlsp.on_attach(lsp, bufnr)
-    -- navic.attach(lsp, bufnr)
-    -- navbuddy.attach(lsp, bufnr)
-  end,
+lspconfig.lua_ls.setup {
+  settings = {
+    Lua = {
+      diagnostics = { globals = { "vim" } },
+    },
+  },
 }
+
+-- lspconfig.clangd.setup {
+--   on_attach = function(lsp, bufnr)
+--     nvlsp.on_attach(lsp, bufnr)
+--   end,
+-- }

@@ -62,8 +62,21 @@ require("luasnip.loaders.from_vscode").load {
 require("luasnip.loaders.from_vscode").lazy_load()
 vim.api.nvim_set_keymap(
   "i",
-  "<C-o>",
-  "<cmd> lua vim.lsp.buf.completion() <CR>",
+  "<Tab>",
+  "<cmd>lua require('luasnip').expand_or_jump()<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "i",
+  "<S-Tab>",
+  "<cmd>lua require('luasnip').jump(-1)<CR>",
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-Space>",
+  "<cmd>lua require('luasnip').change_choice(1) <CR>",
+  -- "<cmd> :echo 'a' <CR>",
   { noremap = true, silent = true }
 )
 
