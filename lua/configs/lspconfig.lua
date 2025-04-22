@@ -55,8 +55,8 @@ lspconfig.lua_ls.setup {
   },
 }
 
--- lspconfig.clangd.setup {
---   on_attach = function(lsp, bufnr)
---     nvlsp.on_attach(lsp, bufnr)
---   end,
--- }
+lspconfig.clangd.setup {
+  on_attach = function(lsp, bufnr)
+    nvlsp.on_attach(lsp, bufnr)
+  end,
+}
