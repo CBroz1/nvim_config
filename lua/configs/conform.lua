@@ -9,6 +9,7 @@ local options = {
     python = { "isort", "black", "ruff_fix", "ruff_format" },
     markdown = { "markdownlint" },
     sql = { "sqlfluff" },
+    toml = { "pyproject-fmt" },
     ["*"] = { "codespell", "trim_whitespace" },
   },
   notify_on_error = false,
@@ -22,7 +23,7 @@ local options = {
       prepend_args = { "--line-length", "80" },
     },
     ruff_fix = {
-      prepend_args = { "--line-length", "80" },
+      -- prepend_args = { "--line-length", "80" },
     },
     ruff_format = {
       prepend_args = { "--line-length", "80" },

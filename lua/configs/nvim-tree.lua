@@ -11,6 +11,7 @@ require("nvim-tree").setup {
   filters = {
     custom = {
       "^.git$",
+      "^.git*",
       "*.egg-info",
       "^.idea*",
       "*.github",

@@ -162,7 +162,7 @@ end, { desc = "rewrap2" })
 -- end, opts "NvRenamer")
 map("n", "<leader>ra", require "nvchad.lsp.renamer", opts "NvRenamer")
 -- Toggle Windows
-map("n", "<C-f>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
+-- map("n", "<C-f>", "<cmd> NvimTreeToggle <CR>", { desc = "toggle nvimtree" })
 map("n", "<C-j>", "<cmd> VimtexTocToggle <CR>", { desc = "toggle vimtex" })
 map("n", "<C-y>", "<cmd> AerialNavToggle <CR>", { desc = "navbuddy" })
 map("n", "<C-l>", "<cmd> AerialToggle <CR>", { desc = "toggle tagbar" })

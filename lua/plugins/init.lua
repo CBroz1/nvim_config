@@ -1,4 +1,39 @@
 return {
+  {
+    "yetone/avante.nvim",
+    build = "make",
+    opts = function()
+      return require "configs.avante"
+    end,
+    config = function(_, opts)
+      require("avante_lib").load()
+      require("avante").setup(opts)
+    end,
+    event = "VeryLazy",
+    version = false,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "echasnovski/mini.pick", -- for file_selector provider mini.pick
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "ibhagwan/fzf-lua", -- for file_selector provider fzf
+      "stevearc/dressing.nvim", -- for input provider dressing
+      "folke/snacks.nvim", -- for input provider snacks
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      "zbirenbaum/copilot.lua", -- for providers='copilot'
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+      },
+    },
+  },
+  { "nvim-tree/nvim-tree.lua", enabled = true }, -- Left file tree
   { -- Formatter
     "stevearc/conform.nvim",
     enabled = true,
@@ -20,16 +55,15 @@ return {
     },
     config = function()
       require "configs.lspconfig"
-      -- require "configs.navbuddy"
     end,
   },
-  {
+  { -- File navigator tree
     "stevearc/aerial.nvim",
+    enabled = true,
     opts = {},
-    -- Optional dependencies
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
+      -- "nvim-tree/nvim-web-devicons",
     },
     config = function()
       require "configs.aerial"
@@ -52,9 +86,9 @@ return {
       },
     },
   },
-  {
+  { -- Show context of current function at top
     "nvim-treesitter/nvim-treesitter-context",
-    lazy = false,
+    lazy = true,
     config = function()
       require("treesitter-context").setup {
         max_lines = 5,
@@ -70,6 +104,18 @@ return {
         lsp = {
           signature = { enabled = false },
           hover = { enabled = false },
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        presets = {
+          bottom_search = false, -- use a classic bottom cmdline for search
+          command_palette = false, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
         },
       }
       require("notify").setup { background_colour = "#282A36" }
@@ -152,6 +198,7 @@ return {
   },
   {
     "ThePrimeagen/harpoon",
+    enabled = true,
     event = "BufReadPre",
     config = function()
       require("harpoon").setup()
@@ -171,7 +218,7 @@ return {
       require("Comment").setup(opts)
     end,
   },
-  { "cespare/vim-toml" }, -- add toml syntax
+  { "cespare/vim-toml", enabled = true }, -- add toml syntax
   { "tpope/vim-surround", enabled = true, event = "VeryLazy" }, -- surround with `csw"`
   { "jeetsukumaran/vim-indentwise", enabled = false, event = "VeryLazy" }, -- move based on indent
   { "tmhedberg/SimpylFold", enabled = true, event = "VeryLazy" }, -- for python
