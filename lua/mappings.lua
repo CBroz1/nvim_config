@@ -68,10 +68,6 @@ end, { desc = "Comment Toggle" })
 map("n", "<leader><leader>", ":", { desc = "cmdline" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 -- Navigation
--- map("n", "<C-n>", "<C-w>h", { desc = "Switch Window left" })
--- map("n", "<C-e>", "<C-w>j", { desc = "Switch Window down" })
--- map("n", "<C-i>", "<C-w>k", { desc = "Switch Window up" })
--- map("n", "<C-o>", "<C-w>l", { desc = "Switch Window right" })
 map("n", "<C-w>n", "<C-w>h", { desc = "Switch Window left" })
 map("n", "<C-w>e", "<C-w>j", { desc = "Switch Window down" })
 map("n", "<C-w>i", "<C-w>k", { desc = "Switch Window up" })
@@ -131,6 +127,19 @@ map(
   "<cmd> Gitsigns toggle_current_line_blame <CR>",
   { desc = "git blame toggle" }
 )
+map(
+  "n",
+  "<leader>gq",
+  "<cmd> lua vim.opt.formatoptions:remove('at') <CR>",
+  { desc = "formatoptions no at" }
+)
+map(
+  "n",
+  "<leader>gz",
+  "<cmd> Copilot detach <CR> <cmd> lua require('cmp').setup.buffer { enabled = false } <CR>",
+  { desc = "Zen mode" }
+)
+
 -- N prefix, line nums, notif, wrap
 map(
   "n",

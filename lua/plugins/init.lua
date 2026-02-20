@@ -172,6 +172,12 @@ return {
         require("telescope").load_extension "fzf"
       end,
     },
+    opts = function()
+      return require "configs.telescope"
+    end,
+    config = function(_, opts)
+      require("telescope").setup(opts)
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -289,5 +295,21 @@ return {
       vim.g.vimtex_view_method = "zathura"
       vim.g.vimtex_fold_enabled = 1
     end,
+  },
+  {
+    "jamessan/vim-gnupg",
+    init = function()
+      vim.g.loaded_gnupg = nil
+    end,
+    lazy = false,
+    -- event = { "BufReadPre *.gpg", "BufNewFile *.gpg" },
+  },
+  {
+    "hedyhli/markdown-toc.nvim",
+    ft = "markdown", -- Lazy load on markdown filetype
+    cmd = { "Mtoc" }, -- Or, lazy load on "Mtoc" command
+    opts = {
+      -- Your configuration here (optional)
+    },
   },
 }
