@@ -89,6 +89,7 @@ return {
   { -- Show context of current function at top
     "nvim-treesitter/nvim-treesitter-context",
     lazy = true,
+    event = "VeryLazy",
     config = function()
       require("treesitter-context").setup {
         max_lines = 5,

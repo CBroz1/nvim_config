@@ -35,6 +35,7 @@ return {
       "--glob=!**/*.egg-info/**",
       "--glob=!**/dist/**",
       "--glob=!**/.tox/**",
+      "--glob=!**/site/**",
       "--glob=!.git/",
     },
     -- Additional file ignore patterns (applies to find_files and live_grep)
