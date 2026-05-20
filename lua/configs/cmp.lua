@@ -123,3 +123,18 @@ cmp.setup.filetype({ "python" }, {
     { name = "treesitter" },
   },
 })
+
+-- Prevent the buffer view from scrolling right when the completion popup
+-- extends past the right edge of the window. Save leftcol at menu_opened,
+-- then restore it after Neovim has processed the floating-window layout
+-- (which is what causes the unwanted horizontal scroll).
+cmp.event:on("menu_opened", function()
+  local saved = vim.fn.winsaveview().leftcol
+  vim.schedule(function()
+    local v = vim.fn.winsaveview()
+    if v.leftcol ~= saved then
+      v.leftcol = saved
+      vim.fn.winrestview(v)
+    end
+  end)
+end)

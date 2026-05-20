@@ -50,7 +50,7 @@ lspconfig.pylsp.setup {
 lspconfig.lua_ls.setup {
   settings = {
     Lua = {
-      diagnostics = { globals = { "vim" } },
+      diagnostics = { globals = { "use", "vim" } },
     },
   },
 }
