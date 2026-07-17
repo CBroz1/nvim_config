@@ -1,5 +1,17 @@
 local cmp = require "cmp"
 
+-- Copilot needs node; drop its cmp source when node is unavailable so nodeless
+-- machines don't reference an unregistered source.
+local has_copilot = vim.fn.executable "node" == 1
+local function with_copilot(sources)
+  if has_copilot then
+    return sources
+  end
+  return vim.tbl_filter(function(s)
+    return s.name ~= "copilot"
+  end, sources)
+end
+
 cmp.setup {
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -39,7 +51,7 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
     },
   },
-  sources = cmp.config.sources {
+  sources = cmp.config.sources(with_copilot {
     { name = "buffer" },
     { name = "cmdline" },
     { name = "copilot" },
@@ -53,7 +65,7 @@ cmp.setup {
     { name = "nvim_lua" }, -- None?
     { name = "path" },
     { name = "treesitter" },
-  },
+  }),
 }
 
 require("luasnip.loaders.from_vscode").load {
@@ -101,7 +113,7 @@ cmp.setup.cmdline(":", {
 -- }
 
 cmp.setup.filetype({ "markdown", "latex", "help" }, {
-  sources = {
+  sources = with_copilot {
     { name = "buffer" },
     { name = "copilot" },
     { name = "emoji" },
@@ -112,7 +124,7 @@ cmp.setup.filetype({ "markdown", "latex", "help" }, {
   },
 })
 cmp.setup.filetype({ "python" }, {
-  sources = {
+  sources = with_copilot {
     { name = "copilot" },
     { name = "ctags" },
     { name = "emoji" },

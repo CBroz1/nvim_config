@@ -26,6 +26,7 @@ require("nvim-tree").setup {
       ".pytest_cache",
       ".ruff_cache",
       ".vscode*",
+      "^.venv*",
       "CITATION.cff",
       "CODE_OF_CONDUCT.md",
       "LICENSE",

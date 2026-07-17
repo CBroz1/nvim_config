@@ -28,8 +28,8 @@ require("lazy").setup({
     branch = "v2.5",
     import = "nvchad.plugins",
   },
-
   { import = "plugins" },
+  -- { opts = { rocks = { enabled = false }}}
 }, lazy_config)
 
 -- load theme
@@ -54,8 +54,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     local path = vim.api.nvim_buf_get_name(buf)
 
     if path:match "^/home/cb/Documents/" then
-      -- Disable Copilot for this buffer
-      vim.cmd "Copilot disable"
+      -- Disable Copilot for this buffer (no-op if copilot isn't loaded, e.g. no node)
+      pcall(vim.cmd, "Copilot disable")
 
       -- Disable nvim-cmp for this buffer
       require("cmp").setup.buffer {

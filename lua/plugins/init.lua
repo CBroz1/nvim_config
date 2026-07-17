@@ -1,6 +1,7 @@
 return {
   {
     "yetone/avante.nvim",
+    enabled = false,
     build = "make",
     opts = function()
       return require "configs.avante"
@@ -153,7 +154,7 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = vim.fn.executable "node" == 1, -- needs node > 16.x; skip on nodeless machines
     cmd = "Copilot",
     lazy = false,
     event = "InsertEnter",
@@ -197,7 +198,7 @@ return {
       "tzachar/fuzzy.nvim",
       "tzachar/cmp-fuzzy-buffer",
       "tzachar/cmp-fuzzy-path",
-      "zbirenbaum/cmp-copilot",
+      { "zbirenbaum/cmp-copilot", enabled = vim.fn.executable "node" == 1 },
     },
     config = function()
       require "configs.cmp"
